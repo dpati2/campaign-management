@@ -1,0 +1,59 @@
+// reseting css
+body {
+  font-size: 14px;
+  color: #7788A3;
+}
+div,p,h1,h2,h3,h4,ul,li,tr,td {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+.select {
+  position: absolute;
+  right: 30px;
+  top: 104px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1077px;
+  margin: auto;
+}
+.app {
+  padding-top: 80px;
+}
+.header {
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  background: #1F2640;
+  display: flex;
+  align-items: center;
+  left:0;
+  top:0;
+}
+.heading {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 25px;
+  color: #2B416C;
+  margin: 20px 0;
+}
+.tab {
+  font-size: 18px;
+  line-height: 28px;
+  color: #556789;
+  list-style: none;
+  display: flex;
+  border-bottom: 1px solid #F1F1F4;
+  li {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  .active {
+    color: #83A515;
+    font-weight: 500;
+    border-bottom: 3px solid #83A515;
+  }
+}
