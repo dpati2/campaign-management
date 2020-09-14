@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { generate } from 'fast-glob/out/managers/tasks';
+import React from 'react';
 
 const Modal = ({showModal, data}) => {
-  console.log("====props==>",data);
   const {
     image_url,
     name,
@@ -25,7 +23,7 @@ const Modal = ({showModal, data}) => {
       <div className="layer" onClick={hideModal}></div>
       <div className="modal-body">
         <div className="head">
-          <img src={`./${image_url}`}></img>
+          <img src={`./${image_url}`} alt="profile"></img>
           <div>
             <p className="name">{name}</p>
             <p className="region">{region}</p>

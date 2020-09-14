@@ -1,12 +1,23 @@
+$tablet-width: 768px;
+$mobile-width: 460px;
+.ellipsis {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media only screen and (max-width: $tablet-width) {
+    max-width: 80px;
+  }
+}
 .tableData {
   background: #FFFFFF;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   margin: 40px 0;
   width: 100%;
   text-align: left;
-
+  border-spacing: 0;
   tbody {
-    tr {
+    td{
       border-bottom: 1px solid #ECECEC;
     }
     i {
@@ -16,15 +27,30 @@
       display: inline-block;
     }
   }
+  .flex {
+    display: flex;
+    @media only screen and (max-width: $tablet-width) {
+      flex-direction: column;
+    }
+  }
   .head {
     background: #F1F1F4;
   }
   th {
     padding: 10px 20px;
+    @media only screen and (max-width: $tablet-width) {
+      padding: 10px;
+    }
   }
   td {
     padding: 20px;
     height: 90px;
+    @media only screen and (max-width: $tablet-width) {
+      padding: 10px;
+    }
+    @media only screen and (max-width: $mobile-width) {
+      padding: 10px 0;
+    }
   }
   .price {
     background: url('../assets/Price.png');
@@ -39,13 +65,13 @@
     background: url('../assets/statistics-report.png');
   }
   .actions {
-    display: flex;
+    // display: flex;
   }
   .date div {
     color: #2B416C;
   }
   .campaign  {
-    display: flex;
+    // display: flex;
     img {
       width: 40px;
       height: 40px;
@@ -59,6 +85,12 @@
     display: flex;
     align-items: center;
     padding-right: 20px;
+    @media only screen and (max-width: $tablet-width) {
+      padding: 5px 0;
+    }
+    @media only screen and (max-width: $mobile-width) {
+      flex-direction: column;
+    }
     .react-datepicker-wrapper {
       position: absolute;
       input {

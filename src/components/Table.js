@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import Modal from './Modal';
 import {  getEventOccurnce } from '../helper';
-
+import { initialData } from './__mocks__';
 import "react-datepicker/dist/react-datepicker.css";
 import './styles.scss';
-const Table = ({tableData ,updateTableData, activeTab, local}) => {
+
+const Table = ({ activeTab, local}) => {
+  const [tableData ,updateTableData] = useState(initialData.data || []);
   const [modalData, showModal ] = useState({
     show: false,
     data: {}
   })
+
   const filterData = () => {
     if(tableData.length) {
       return tableData.filter(({createdOn}) => {
         switch(activeTab) {
           case '1':
             return getEventOccurnce(createdOn).event === 'UPCOMING';
-            break;
           case '2': 
             return getEventOccurnce(createdOn).event === 'TODAY';
-            break;
           case '3': 
             return getEventOccurnce(createdOn).event === 'PAST';
-            break;
+          default:
+            return false;
         }
       })
     }
     return [];
-  }
+  };
 
   const headTable = () => (
     <tr className="head">
@@ -66,24 +68,24 @@ const Table = ({tableData ,updateTableData, activeTab, local}) => {
       }
       return elm
     })
-    console.log("===>updatedData==>",updatedData);
     updateTableData(updatedData);
   }
 
   const tableBody = () => {
-    const filterdData = filterData();
-    console.log("====>",tableData,"====>",filterdData);
+    const filterdData = filterData(tableData);
     return filterdData.map((elm) => (
-      <tr>
+      <tr key={elm.id}>
         <td className="date">
-          <div>{getDateStr(elm.createdOn)}</div>
-          <i>{getDaysStr(elm.createdOn)}</i>
+          <div className="ellipsis">{getDateStr(elm.createdOn)}</div>
+          <i className="ellipsis">{getDaysStr(elm.createdOn)}</i>
         </td>
         <td className="campaign">
-          <img src={`./${elm.image_url}`}/>
-          <div>
-            <p>{elm.name}</p>
-            <i>{elm.region}</i>
+          <div className="flex">
+            <img src={`./${elm.image_url}`} alt="profile"/>
+            <div>
+              <p className="ellipsis">{elm.name}</p>
+              <i>{elm.region}</i>
+            </div>
           </div>
        </td>
         <td className="view">
@@ -94,24 +96,26 @@ const Table = ({tableData ,updateTableData, activeTab, local}) => {
           })
           }}>
               <i className="price"></i>
-              <span>View Pricing</span>
+              <span className="ellipsis">View Pricing</span>
             </div>
         </td>
         <td className="actions">
-          <div className="icon-container">
-            <i className="file"></i>
-            <span>CSV</span>
-          </div>
-          <div className="icon-container">
-            <i className="report"></i>
-            <span>Report</span>
-          </div>
-          <div className="icon-container">
-           <DatePicker 
-            onChange={(date) => {onDateChange(date,elm.id)}}>
-            </DatePicker>
-            <i className="calendar"></i>
-            <span>Schedule Again</span>
+          <div className="flex">
+            <div className="icon-container">
+              <i className="file"></i>
+              <span>CSV</span>
+            </div>
+            <div className="icon-container">
+              <i className="report"></i>
+              <span>Report</span>
+            </div>
+            <div className="icon-container">
+            <DatePicker 
+              onChange={(date) => {onDateChange(date,elm.id)}}>
+              </DatePicker>
+              <i className="calendar"></i>
+              <span className="ellipsis">Schedule Again</span>
+            </div>
           </div>
         </td>
       </tr>
